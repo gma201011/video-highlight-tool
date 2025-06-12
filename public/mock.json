@@ -1,0 +1,141 @@
+{
+  "full_transcript": "When you hear the term artificial intelligence, what comes to mind? Super-powered robots, hyper-intelligent devices. Science fiction has familiarized the world with the concept. But outside of Hollywood, what is artificial intelligence? And what can AI actually do for starters? AI involves using computers to do things that usually require human intelligence. Humans can see with their eyes and process what they see. We can understand our environments and move around within them. Our brains have the ability to see patterns, and we have the ability to understand spoken language. Artificial intelligence is a broad branch of computer science that includes many different terms. In order for computers to achieve these capabilities, they require lots and lots of data—large data sets. Allow AI algorithms to identify patterns, make predictions, and recommend actions. Artificial intelligence is already all around us. But today’s best AI still can't compete with the human brain in some ways. For example, in 2016, the computer program AlphaGo defeated a legendary professional Go player. But if you ask that same computer to drive a car or walk or even play Monopoly, it wouldn't be able to do so on its own. AI's computing power is massive, but our human brains are able to tackle a much wider set of data and methods.",
+  "sections": [
+    {
+      "title": "What is AI?",
+      "start": 0,
+      "end": 20,
+      "sentences": [
+        {
+          "text": "When you hear the term artificial intelligence what comes to mind?",
+          "start": 5,
+          "end": 9,
+          "highlight": true
+        },
+        {
+          "text": "Super-powered robots hyper-intelligent devices.",
+          "start": 9,
+          "end": 12,
+          "highlight": false
+        },
+        {
+          "text": "Science fiction has familiarized the world with the concept.",
+          "start": 13,
+          "end": 17,
+          "highlight": true
+        },
+        {
+          "text": "But outside of Hollywood what is artificial intelligence?",
+          "start": 17,
+          "end": 20,
+          "highlight": false
+        }
+      ]
+    },
+    {
+      "title": "AI vs Human Intelligence",
+      "start": 20,
+      "end": 45,
+      "sentences": [
+        {
+          "text": "And what can AI actually do for starters?",
+          "start": 20,
+          "end": 24,
+          "highlight": false
+        },
+        {
+          "text": "AI involves using computers to do things that usually require human intelligence.",
+          "start": 24,
+          "end": 27,
+          "highlight": true
+        },
+        {
+          "text": "Humans can see with their eyes and process what they see.",
+          "start": 30,
+          "end": 32,
+          "highlight": false
+        },
+        {
+          "text": "We can understand our environments and move around within them.",
+          "start": 33,
+          "end": 35,
+          "highlight": false
+        },
+        {
+          "text": "Our brains have the ability to see patterns and we have the ability to understand spoken language.",
+          "start": 37,
+          "end": 41,
+          "highlight": true
+        }
+      ]
+    },
+    {
+      "title": "How AI Works",
+      "start": 46,
+      "end": 60,
+      "sentences": [
+        {
+          "text": "Artificial intelligence is a broad branch of computer science that includes many different terms.",
+          "start": 44,
+          "end": 48,
+          "highlight": true
+        },
+        {
+          "text": "In order for computers to achieve these capabilities.",
+          "start": 49,
+          "end": 51,
+          "highlight": false
+        },
+        {
+          "text": "They require lots and lots of data large data sets.",
+          "start": 52,
+          "end": 56,
+          "highlight": false
+        },
+        {
+          "text": "Allow AI algorithms to identify patterns make predictions and recommend actions.",
+          "start": 56,
+          "end": 60,
+          "highlight": false
+        }
+      ]
+    },
+    {
+      "title": "AI Today vs Human Brains",
+      "start": 61,
+      "end": 90,
+      "sentences": [
+        {
+          "text": "Artificial intelligence is already all around us.",
+          "start": 63,
+          "end": 65,
+          "highlight": true
+        },
+        {
+          "text": "But today’s best AI still can't compete with the human brain in some ways.",
+          "start": 66,
+          "end": 68,
+          "highlight": false
+        },
+        {
+          "text": "For example in 2016 the computer program AlphaGo defeated a legendary professional Go player.",
+          "start": 71,
+          "end": 77,
+          "highlight": false
+        },
+        {
+          "text": "But if you ask that same computer to drive a car or walk or even play Monopoly it wouldn't be able to do so on its own.",
+          "start": 78,
+          "end": 84,
+          "highlight": false
+        },
+        {
+          "text": "AI's computing power is massive but our human brains are able to tackle a much wider set of data and methods.",
+          "start": 86,
+          "end": 91,
+          "highlight": true
+        }
+      ]
+    }
+  ]
+}

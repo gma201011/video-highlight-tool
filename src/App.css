@@ -1,0 +1,65 @@
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+.noselect {
+  user-select: none;
+}
+
+.app-container {
+  height: 100vh;
+  background: #090911;
+  color: #fff;
+}
+
+.app-header {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  padding: 0 32px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  background: #090911 !important;
+  color: #fff !important;
+}
+
+.app-content {
+  height: calc(100% - 64px);
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.cards-container {
+  display: flex;
+  height: 100%;
+  gap: 2px;
+}
+
+.resizer {
+  flex: none;
+  width: 4px;
+  cursor: col-resize;
+  background: transparent;
+  transition: background .2s;
+  z-index: 5;
+}
+
+.resizer:hover {
+  background: #a966ff
+}
+
+.cards-container>.ant-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.cards-container>.ant-card>.ant-card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 0 !important;
+  min-height: 0;
+}
