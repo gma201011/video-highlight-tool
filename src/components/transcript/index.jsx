@@ -18,13 +18,15 @@ export default function Transcript({
   onToggle,
   onJump,
   setCurrentSegment,
-  onCollapse
 }) {
   const refs = useRef({});
 
   useEffect(() => {
     if (currentId && refs.current[currentId]) {
-      refs.current[currentId].scrollIntoView({ behavior: 'smooth', block: 'center' });
+           refs.current[currentId].scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        });
     }
   }, [currentId]);
 
@@ -34,12 +36,17 @@ export default function Transcript({
         <div className="transcript-header">
           <Title level={4} className="pane-title">Transcript</Title>
         </div>
-        <Divider className="transcript-divider" style={{ borderColor: '#2b2b32', margin: 0 }} />
+        <Divider
+          className="transcript-divider"
+          style={{ borderColor: '#2b2b32', margin: 0 }}
+        />
       </div>
       <div className="transcript-body">
         {sections.map((sec, si) => (
           <div key={si} className="section">
-            <Text strong className="section-title">{sec.title}</Text>
+            <Text strong className="section-title">
+              {sec.title}
+            </Text>
             {sec.sentences.map((s, i) => {
               const id = `${si}-${i}`;
               const isCur = id === currentId;
@@ -47,8 +54,10 @@ export default function Transcript({
               return (
                 <div
                   key={id}
-                  ref={el => refs.current[id] = el}
-                  className={`transcript-item ${segment && segment.highlight ? 'selected' : ''} ${isCur ? 'current' : ''}`}
+                  ref={el => (refs.current[id] = el)}
+                  className={`transcript-item ${
+                    segment && segment.highlight ? 'selected' : ''
+                  } ${isCur ? 'current' : ''}`}
                   onClick={() => {
                     setCurrentSegment(segment);
                     onJump(s.start, segment);
@@ -57,7 +66,10 @@ export default function Transcript({
                   <Checkbox
                     checked={segment ? segment.highlight : false}
                     onClick={e => e.stopPropagation()}
-                    onChange={e => { e.stopPropagation(); onToggle(id); }}
+                    onChange={e => {
+                      e.stopPropagation();
+                      onToggle(id);
+                    }}
                   />
                   <Text className="time-stamp">[{formatTime(s.start)}]</Text>
                   <Text className="sentence">{s.text}</Text>

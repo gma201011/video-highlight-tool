@@ -198,3 +198,34 @@
 .transcript-item.selected.current {
   user-select: none;
 }
+
+@media (max-width: 768px) {
+  .video-card>.ant-card-body {
+    min-height: 0;
+  }
+  .subtitle-container {
+    display: none;
+  }
+  .overlay-text {
+    width: 100%;
+  }
+
+    .subtitle-scroll {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 12px;
+    background: #13131b;
+  }
+  .subtitle-item {
+    position: relative !important;
+    left: auto !important;
+    width: 80%;
+    min-width: 200px;
+    margin-right: 12px;
+    background: #722ed1;
+    color: #fff;
+    white-space: normal;
+  }
+}

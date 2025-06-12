@@ -120,6 +120,7 @@ export default function App() {
           <div ref={containerRef} className="cards-container">
             {!collapsed && (
               <Card
+                className="transcript-card"
                 bordered={false}
                 style={{
                   flex: `0 0 ${leftW}px`,
@@ -143,6 +144,7 @@ export default function App() {
               </Card>
             )}
             <Card
+              className="preview-card"
               bordered={false}
               style={{
                 flex: 1,
