@@ -1,6 +1,7 @@
-import  { useState, useRef, useEffect } from 'react';
-import { Layout, Card } from 'antd';
+import { useState, useRef, useEffect } from 'react';
+import { Layout, Card, message } from 'antd';
 import { VideoCameraOutlined } from '@ant-design/icons';
+import VideoUpload from './components/VideoUpload';
 import Transcript from './components/transcript';
 import Preview from './components/preview';
 import './App.css';
@@ -13,31 +14,31 @@ export default function App() {
 
   const [leftW, setLeftW] = useState(350);
   const [collapsed, setCollapsed] = useState(false);
+
+  const [videoUrl, setVideoUrl] = useState('');
+
   const [data, setData] = useState(null);
   const [flat, setFlat] = useState([]);
   const [currentId, setCurrentId] = useState(null);
   const [currentSegment, setCurrentSegment] = useState(null);
+
   const videoRef = useRef(null);
 
-  const onMouseDown = () => {
-    dragging.current = true;
-    containerRef.current.classList.add('noselect');
-  };
-  const onMouseMove = (e) => {
-    if (!dragging.current || !containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    let nw = e.clientX - rect.left;
-    const min = rect.width * 0.25;
-    const max = rect.width * 0.5;
-    if (nw < min) nw = min;
-    if (nw > max) nw = max;
-    setLeftW(nw);
-  };
-  const onMouseUp = () => {
-    dragging.current = false;
-    containerRef.current.classList.remove('noselect');
-  };
   useEffect(() => {
+    const onMouseMove = e => {
+      if (!dragging.current || !containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      let nw = e.clientX - rect.left;
+      const min = rect.width * 0.25;
+      const max = rect.width * 0.5;
+      if (nw < min) nw = min;
+      if (nw > max) nw = max;
+      setLeftW(nw);
+    };
+    const onMouseUp = () => {
+      dragging.current = false;
+      containerRef.current.classList.remove('noselect');
+    };
     window.addEventListener('mousemove', onMouseMove);
     window.addEventListener('mouseup', onMouseUp);
     return () => {
@@ -46,7 +47,14 @@ export default function App() {
     };
   }, []);
 
+  const handleFilesReady = files => {
+    if (files.length === 0) return;
+    const url = URL.createObjectURL(files[0]);
+    setVideoUrl(url);
+  };
+
   useEffect(() => {
+    if (!videoUrl) return;
     fetch('/mock.json')
       .then(r => r.json())
       .then(json => {
@@ -60,8 +68,11 @@ export default function App() {
         );
         setFlat(_flat);
       })
-      .catch(console.error);
-  }, []);
+      .catch(err => {
+        console.error(err);
+        message.error('Read mock data failed');
+      });
+  }, [videoUrl]);
 
   useEffect(() => {
     const v = videoRef.current;
@@ -74,9 +85,7 @@ export default function App() {
       }
     };
     v.addEventListener('timeupdate', onTime);
-    return () => {
-      v.removeEventListener('timeupdate', onTime);
-    };
+    return () => v.removeEventListener('timeupdate', onTime);
   }, [flat, currentId]);
 
   const jumpTo = (t, seg) => {
@@ -94,8 +103,6 @@ export default function App() {
     );
   };
 
-  if (!data) return <div className="loading">Loading…</div>;
-
   return (
     <Layout className="app-container">
       <Header className="app-header">
@@ -103,9 +110,15 @@ export default function App() {
         Video Highlight Tool
       </Header>
       <Content className="app-content">
-        <div ref={containerRef} className="cards-container">
-          {!collapsed && (
-            <>
+        {!videoUrl && (
+          <div className="upload-container">
+            <VideoUpload onFilesReady={handleFilesReady} />
+          </div>
+        )}
+
+        {videoUrl && data && (
+          <div ref={containerRef} className="cards-container">
+            {!collapsed && (
               <Card
                 bordered={false}
                 style={{
@@ -128,33 +141,33 @@ export default function App() {
                   setCurrentSegment={setCurrentSegment}
                 />
               </Card>
-              <div className="resizer" onMouseDown={onMouseDown} />
-            </>
-          )}
-          <Card
-            bordered={false}
-            style={{
-              flex: 1,
-              height: '100%',
-              borderRadius: '16px',
-              overflow: 'hidden',
-              background: '#1e1e29',
-              boxShadow: '0 8px 16px rgba(0,0,0,0.4)'
-            }}
-            bodyStyle={{ padding: 0, display: 'flex', flexDirection: 'column' }}
-          >
-            <Preview
-              videoRef={videoRef}
-              flat={flat}
-              onJump={jumpTo}
-              currentSegment={currentSegment}
-              setCurrentSegment={setCurrentSegment}
-              currentId={currentId}
-              isCollapsed={collapsed}
-              onExpand={() => setCollapsed(false)}
-            />
-          </Card>
-        </div>
+            )}
+            <Card
+              bordered={false}
+              style={{
+                flex: 1,
+                height: '100%',
+                borderRadius: '16px',
+                overflow: 'hidden',
+                background: '#1e1e29',
+                boxShadow: '0 8px 16px rgba(0,0,0,0.4)'
+              }}
+              bodyStyle={{ padding: 0, display: 'flex', flexDirection: 'column' }}
+            >
+              <Preview
+                videoRef={videoRef}
+                flat={flat}
+                onJump={jumpTo}
+                currentSegment={currentSegment}
+                setCurrentSegment={setCurrentSegment}
+                currentId={currentId}
+                isCollapsed={collapsed}
+                onExpand={() => setCollapsed(false)}
+                videoUrl={videoUrl}
+              />
+            </Card>
+          </div>
+        )}
       </Content>
     </Layout>
   );

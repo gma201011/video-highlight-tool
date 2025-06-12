@@ -63,3 +63,21 @@ body,
   padding: 0 !important;
   min-height: 0;
 }
+
+.upload-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+}
+
+.dark-dragger {
+  background: #13131b;
+  border: 1px dashed #333;
+  border-radius: 8px;
+}
+.dark-dragger .ant-upload-drag-icon,
+.dark-dragger .ant-upload-text,
+.dark-dragger .ant-upload-hint {
+  color: #fff;
+}

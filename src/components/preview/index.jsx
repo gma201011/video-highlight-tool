@@ -14,7 +14,8 @@ export default function Preview({
   onJump,
   currentSegment,
   setCurrentSegment,
-  currentId
+  currentId,
+  videoUrl
 }) {
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
@@ -47,7 +48,6 @@ export default function Preview({
     const v = videoRef.current;
     if (!v || !currentSegment) return;
     v.currentTime = currentSegment.start;
-    v.play();
   }, [currentSegment, videoRef]);
 
   useEffect(() => {
@@ -118,7 +118,13 @@ export default function Preview({
     <div className="preview-pane">
       <Card className="video-card" bordered={false} bodyStyle={{ padding: 0 }}>
         <div className="video-wrapper">
-          <video ref={videoRef} className="video-player" src="/test.mp4" controls={false} />
+          <video
+            ref={videoRef}
+            className="video-player"
+            // src={videoUrl}
+            src={"./test.mp4"}
+            controls={false}
+          />
           {overlayText && <div className="overlay-text">{overlayText}</div>}
         </div>
       </Card>

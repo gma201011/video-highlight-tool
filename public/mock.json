@@ -10,7 +10,7 @@
           "text": "When you hear the term artificial intelligence what comes to mind?",
           "start": 5,
           "end": 8,
-          "highlight": true
+          "highlight": false
         },
         {
           "text": "Super-powered robots hyper-intelligent devices.",
@@ -22,7 +22,7 @@
           "text": "Science fiction has familiarized the world with the concept.",
           "start": 13,
           "end": 16,
-          "highlight": true
+          "highlight": false
         },
         {
           "text": "But outside of Hollywood what is artificial intelligence?",
@@ -45,9 +45,9 @@
         },
         {
           "text": "AI involves using computers to do things that usually require human intelligence.",
-          "start": 24,
-          "end": 27,
-          "highlight": true
+          "start": 25,
+          "end": 29,
+          "highlight": false
         },
         {
           "text": "Humans can see with their eyes and process what they see.",
@@ -64,7 +64,7 @@
         {
           "text": "Our brains have the ability to see patterns and we have the ability to understand spoken language.",
           "start": 37,
-          "end": 41,
+          "end": 42,
           "highlight": true
         }
       ]
@@ -78,7 +78,7 @@
           "text": "Artificial intelligence is a broad branch of computer science that includes many different terms.",
           "start": 44,
           "end": 48,
-          "highlight": true
+          "highlight": false
         },
         {
           "text": "In order for computers to achieve these capabilities.",
@@ -127,7 +127,7 @@
           "text": "But if you ask that same computer to drive a car or walk or even play Monopoly it wouldn't be able to do so on its own.",
           "start": 78,
           "end": 84,
-          "highlight": false
+          "highlight": true
         },
         {
           "text": "AI's computing power is massive but our human brains are able to tackle a much wider set of data and methods.",
