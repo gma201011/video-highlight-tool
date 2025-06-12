@@ -13,7 +13,6 @@ export default function App() {
   const dragging = useRef(false);
 
   const [leftW, setLeftW] = useState(350);
-  const [collapsed, setCollapsed] = useState(false);
 
   const [videoUrl, setVideoUrl] = useState('');
 
@@ -103,31 +102,29 @@ export default function App() {
 
         {videoUrl && data && (
           <div ref={containerRef} className="cards-container">
-            {!collapsed && (
-              <Card
-                className="transcript-card"
-                bordered={false}
-                style={{
-                  flex: `0 0 ${leftW}px`,
-                  height: '100%',
-                  borderRadius: '16px',
-                  overflow: 'hidden',
-                  background: '#13131b',
-                  boxShadow: '0 8px 16px rgba(0,0,0,0.4)'
-                }}
-                bodyStyle={{ padding: 0, display: 'flex', flexDirection: 'column' }}
-              >
-                <Transcript
-                  width="100%"
-                  sections={data.sections}
-                  flat={flat}
-                  currentSegment={currentSegment}
-                  onToggle={toggle}
-                  onJump={jumpTo}
-                  setCurrentSegment={setCurrentSegment}
-                />
-              </Card>
-            )}
+            <Card
+              className="transcript-card"
+              bordered={false}
+              style={{
+                flex: `0 0 ${leftW}px`,
+                height: '100%',
+                borderRadius: '16px',
+                overflow: 'hidden',
+                background: '#13131b',
+                boxShadow: '0 8px 16px rgba(0,0,0,0.4)'
+              }}
+              bodyStyle={{ padding: 0, display: 'flex', flexDirection: 'column' }}
+            >
+              <Transcript
+                width="100%"
+                sections={data.sections}
+                flat={flat}
+                currentSegment={currentSegment}
+                onToggle={toggle}
+                onJump={jumpTo}
+                setCurrentSegment={setCurrentSegment}
+              />
+            </Card>
             <Card
               className="preview-card"
               bordered={false}
