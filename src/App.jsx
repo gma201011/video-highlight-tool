@@ -19,7 +19,6 @@ export default function App() {
 
   const [data, setData] = useState(null);
   const [flat, setFlat] = useState([]);
-  const [currentId, setCurrentId] = useState(null);
   const [currentSegment, setCurrentSegment] = useState(null);
 
   const videoRef = useRef(null);
@@ -74,20 +73,6 @@ export default function App() {
       });
   }, [videoUrl]);
 
-  useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
-    const onTime = () => {
-      const t = v.currentTime;
-      const found = [...flat].reverse().find(s => s.start <= t && t <= s.end);
-      if (found && found.id !== currentId) {
-        setCurrentId(found.id);
-      }
-    };
-    v.addEventListener('timeupdate', onTime);
-    return () => v.removeEventListener('timeupdate', onTime);
-  }, [flat, currentId]);
-
   const jumpTo = (t, seg) => {
     if (!videoRef.current) return;
     videoRef.current.currentTime = t;
@@ -136,7 +121,7 @@ export default function App() {
                   width="100%"
                   sections={data.sections}
                   flat={flat}
-                  currentId={currentId}
+                  currentSegment={currentSegment}
                   onToggle={toggle}
                   onJump={jumpTo}
                   setCurrentSegment={setCurrentSegment}
@@ -162,10 +147,7 @@ export default function App() {
                 onJump={jumpTo}
                 currentSegment={currentSegment}
                 setCurrentSegment={setCurrentSegment}
-                currentId={currentId}
-                isCollapsed={collapsed}
-                onExpand={() => setCollapsed(false)}
-                videoUrl={videoUrl}
+                videoUrl={"./test.mp4"}
               />
             </Card>
           </div>

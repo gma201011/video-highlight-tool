@@ -33,7 +33,7 @@ export default function VideoUpload({ onFilesReady }) {
       );
       if (percent >= 100) {
         clearInterval(timer);
-        const ok = file.size < 50 * 1024 * 1024;
+        const ok = file.size < 500 * 1024 * 1024;
         if (ok) {
           onSuccess('ok');
           setFiles(fs =>

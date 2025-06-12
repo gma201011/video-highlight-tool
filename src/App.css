@@ -130,4 +130,12 @@ body,
   .transcript-card .transcript-pane {
     width: 100% !important;
   }
+
+  html,
+  body,
+  .app-content,
+  .cards-container {
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: auto;
+  }
 }

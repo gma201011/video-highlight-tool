@@ -121,9 +121,10 @@ export default function Preview({
           <video
             ref={videoRef}
             className="video-player"
-            // src={videoUrl}
-            src={"./test.mp4"}
+            src={videoUrl}
             controls={false}
+            playsInline
+            webkit-playsinline="true"
           />
           {overlayText && <div className="overlay-text">{overlayText}</div>}
         </div>

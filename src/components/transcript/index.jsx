@@ -14,7 +14,7 @@ export default function Transcript({
   width,
   sections = [],
   flat = [],
-  currentId,
+  currentSegment,
   onToggle,
   onJump,
   setCurrentSegment,
@@ -22,13 +22,13 @@ export default function Transcript({
   const refs = useRef({});
 
   useEffect(() => {
-    if (currentId && refs.current[currentId]) {
-           refs.current[currentId].scrollIntoView({
-          behavior: 'smooth',
-          block: 'center'
-        });
+    if (currentSegment?.id && refs.current[currentSegment.id]) {
+      refs.current[currentSegment.id].scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
     }
-  }, [currentId]);
+  }, [currentSegment]);
 
   return (
     <div className="transcript-pane" style={{ width }}>
@@ -44,27 +44,26 @@ export default function Transcript({
       <div className="transcript-body">
         {sections.map((sec, si) => (
           <div key={si} className="section">
-            <Text strong className="section-title">
-              {sec.title}
-            </Text>
+            <Text strong className="section-title">{sec.title}</Text>
             {sec.sentences.map((s, i) => {
               const id = `${si}-${i}`;
-              const isCur = id === currentId;
+              const isCur = id === currentSegment?.id;
               const segment = flat.find(f => f.id === id);
+              const highlight = segment?.highlight;
               return (
                 <div
                   key={id}
                   ref={el => (refs.current[id] = el)}
-                  className={`transcript-item ${
-                    segment && segment.highlight ? 'selected' : ''
-                  } ${isCur ? 'current' : ''}`}
+                  className={`transcript-item
+                    ${highlight ? 'selected' : ''}
+                    ${isCur ? 'current' : ''}`}
                   onClick={() => {
                     setCurrentSegment(segment);
                     onJump(s.start, segment);
                   }}
                 >
                   <Checkbox
-                    checked={segment ? segment.highlight : false}
+                    checked={highlight}
                     onClick={e => e.stopPropagation()}
                     onChange={e => {
                       e.stopPropagation();
