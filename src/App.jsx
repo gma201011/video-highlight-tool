@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useMemo } from 'react';
+import  { useState, useRef, useEffect } from 'react';
 import { Layout, Card } from 'antd';
 import { VideoCameraOutlined } from '@ant-design/icons';
 import Transcript from './components/transcript';
@@ -14,8 +14,9 @@ export default function App() {
   const [leftW, setLeftW] = useState(350);
   const [collapsed, setCollapsed] = useState(false);
   const [data, setData] = useState(null);
-  const [selectedIds, setSelectedIds] = useState([]);
+  const [flat, setFlat] = useState([]);
   const [currentId, setCurrentId] = useState(null);
+  const [currentSegment, setCurrentSegment] = useState(null);
   const videoRef = useRef(null);
 
   const onMouseDown = () => {
@@ -49,48 +50,20 @@ export default function App() {
     fetch('/mock.json')
       .then(r => r.json())
       .then(json => {
-        const timeMap = new Map(
-          json.sections.map(item => [
-            item.sentences,
-            { start: item.start, end: item.end + 1 }
-          ])
-        );
-        const correctedSections = json.sections.map(sec => ({
-          ...sec,
-          sentences: sec.sentences.map(s => ({
+        setData(json);
+        const _flat = json.sections.flatMap((sec, si) =>
+          sec.sentences.map((s, i) => ({
             ...s,
-            ...(timeMap.get(s.text) || {})
+            id: `${si}-${i}`,
+            section: sec.title
           }))
-        }));
-        const newData = {
-          ...json,
-          sections: correctedSections
-        };
-        setData(newData);
-
-        const init = correctedSections
-          .flatMap((sec, si) =>
-            sec.sentences.map((s, i) => ({ id: `${si}-${i}`, highlight: s.highlight }))
-          )
-          .filter(x => x.highlight)
-          .map(x => x.id);
-        setSelectedIds(init);
+        );
+        setFlat(_flat);
       })
       .catch(console.error);
   }, []);
 
-  const flat = useMemo(() => {
-    if (!data) return [];
-    return data.sections.flatMap((sec, si) =>
-      sec.sentences.map((s, i) => ({
-        ...s,
-        id: `${si}-${i}`,
-        section: sec.title
-      }))
-    );
-  }, [data]);
-
- useEffect(() => {
+  useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
     const onTime = () => {
@@ -105,16 +78,21 @@ export default function App() {
       v.removeEventListener('timeupdate', onTime);
     };
   }, [flat, currentId]);
-  
-  const jumpTo = t => {
+
+  const jumpTo = (t, seg) => {
     if (!videoRef.current) return;
     videoRef.current.currentTime = t;
+    setCurrentSegment(seg);
     videoRef.current.play();
   };
-  const toggle = id =>
-    setSelectedIds(ids =>
-      ids.includes(id) ? ids.filter(x => x !== id) : [...ids, id]
+
+  const toggle = id => {
+    setFlat(prev =>
+      prev.map(seg =>
+        seg.id === id ? { ...seg, highlight: !seg.highlight } : seg
+      )
     );
+  };
 
   if (!data) return <div className="loading">Loading…</div>;
 
@@ -143,11 +121,11 @@ export default function App() {
                 <Transcript
                   width="100%"
                   sections={data.sections}
-                  selected={selectedIds}
+                  flat={flat}
                   currentId={currentId}
                   onToggle={toggle}
                   onJump={jumpTo}
-                  onCollapse={() => setCollapsed(true)}
+                  setCurrentSegment={setCurrentSegment}
                 />
               </Card>
               <div className="resizer" onMouseDown={onMouseDown} />
@@ -168,8 +146,10 @@ export default function App() {
             <Preview
               videoRef={videoRef}
               flat={flat}
-              selected={selectedIds}
               onJump={jumpTo}
+              currentSegment={currentSegment}
+              setCurrentSegment={setCurrentSegment}
+              currentId={currentId}
               isCollapsed={collapsed}
               onExpand={() => setCollapsed(false)}
             />

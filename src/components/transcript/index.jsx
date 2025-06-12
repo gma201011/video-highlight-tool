@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Typography, Checkbox, Button, Divider } from 'antd';
+import { Typography, Checkbox, Divider } from 'antd';
 import './index.css';
 
 const { Title, Text } = Typography;
@@ -13,10 +13,11 @@ function formatTime(sec) {
 export default function Transcript({
   width,
   sections = [],
-  selected = [],
+  flat = [],
   currentId,
   onToggle,
   onJump,
+  setCurrentSegment,
   onCollapse
 }) {
   const refs = useRef({});
@@ -35,7 +36,6 @@ export default function Transcript({
         </div>
         <Divider className="transcript-divider" style={{ borderColor: '#2b2b32', margin: 0 }} />
       </div>
-
       <div className="transcript-body">
         {sections.map((sec, si) => (
           <div key={si} className="section">
@@ -43,15 +43,19 @@ export default function Transcript({
             {sec.sentences.map((s, i) => {
               const id = `${si}-${i}`;
               const isCur = id === currentId;
+              const segment = flat.find(f => f.id === id);
               return (
                 <div
                   key={id}
                   ref={el => refs.current[id] = el}
-                  className={`transcript-item ${selected.includes(id) ? 'selected' : ''} ${isCur ? 'current' : ''}`}
-                  onClick={() => onJump(s.start)}
+                  className={`transcript-item ${segment && segment.highlight ? 'selected' : ''} ${isCur ? 'current' : ''}`}
+                  onClick={() => {
+                    setCurrentSegment(segment);
+                    onJump(s.start, segment);
+                  }}
                 >
                   <Checkbox
-                    checked={selected.includes(id)}
+                    checked={segment ? segment.highlight : false}
                     onClick={e => e.stopPropagation()}
                     onChange={e => { e.stopPropagation(); onToggle(id); }}
                   />

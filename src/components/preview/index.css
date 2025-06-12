@@ -190,3 +190,11 @@
   margin-right: 8px;
   font-weight: bold;
 }
+
+.transcript-item {
+  user-select: none;
+}
+
+.transcript-item.selected.current {
+  user-select: none;
+}

@@ -9,7 +9,7 @@
         {
           "text": "When you hear the term artificial intelligence what comes to mind?",
           "start": 5,
-          "end": 9,
+          "end": 8,
           "highlight": true
         },
         {
@@ -21,7 +21,7 @@
         {
           "text": "Science fiction has familiarized the world with the concept.",
           "start": 13,
-          "end": 17,
+          "end": 16,
           "highlight": true
         },
         {
@@ -114,7 +114,7 @@
         {
           "text": "But today’s best AI still can't compete with the human brain in some ways.",
           "start": 66,
-          "end": 68,
+          "end": 69,
           "highlight": false
         },
         {
@@ -132,7 +132,7 @@
         {
           "text": "AI's computing power is massive but our human brains are able to tackle a much wider set of data and methods.",
           "start": 86,
-          "end": 91,
+          "end": 93,
           "highlight": true
         }
       ]
