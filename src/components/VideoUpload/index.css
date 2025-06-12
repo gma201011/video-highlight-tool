@@ -5,7 +5,7 @@
   background: #1b1c22;
   border-radius: 12px;
   padding: 16px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 .dark-dragger {
@@ -16,15 +16,18 @@
   margin-bottom: 16px;
   border: 0px solid transparent !important;
 }
+
 .dark-dragger .drag-icon {
   font-size: 32px;
   color: #999;
 }
+
 .dark-dragger .drag-text {
   color: #e0e0e0;
   font-size: 16px;
   margin-top: 8px;
 }
+
 .dark-dragger .drag-hint {
   color: #aaa;
   margin-top: 4px;
@@ -38,40 +41,50 @@
   padding: 8px 0;
   margin-top: 32px;
 }
+
 .file-item {
   color: #fff;
   padding: 8px 16px;
   background: #1f1f28;
   border-bottom: 1px solid #444;
 }
+
 .file-item:last-child {
   border-bottom: none;
 }
+
 .file-icon {
   font-size: 20px;
   color: #888;
 }
+
 .file-name {
   color: #fff;
 }
+
 .file-size {
   color: #888;
 }
+
 .icon-success {
   color: #52c41a;
   font-size: 18px;
 }
+
 .icon-error {
   color: #ff4d4f;
   font-size: 18px;
 }
+
 .icon-delete {
   color: #555;
   font-size: 18px;
 }
+
 .file-error .file-name {
   color: #ff4d4f;
 }
+
 .file-error-text {
   color: #ff4d4f;
 }
@@ -80,11 +93,13 @@
   text-align: right;
   margin-top: 12px;
 }
+
 .send-btn-wrap .ant-btn {
   background: #7c4dff;
   border-color: #7c4dff;
   color: #fff;
 }
+
 .send-btn-wrap .ant-btn:hover,
 .send-btn-wrap .ant-btn:focus {
   background: #8e63ff;
@@ -92,7 +107,7 @@
 }
 
 .ant-empty-description {
-    color: #fff !important;
+  color: #fff !important;
 }
 
 .ant-list-item-meta {

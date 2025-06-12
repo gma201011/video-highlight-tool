@@ -10,7 +10,7 @@
           "text": "When you hear the term artificial intelligence what comes to mind?",
           "start": 5,
           "end": 8,
-          "highlight": true
+          "highlight": false
         },
         {
           "text": "Super-powered robots hyper-intelligent devices.",
@@ -109,7 +109,7 @@
           "text": "Artificial intelligence is already all around us.",
           "start": 63,
           "end": 65,
-          "highlight": true
+          "highlight": false
         },
         {
           "text": "But today’s best AI still can't compete with the human brain in some ways.",
